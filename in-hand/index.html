@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>ES6</title>
+        <title>ES6-React</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
@@ -59,6 +59,104 @@
         hello = (name) => 'Hello ' + name;
         document.getElementById('demo3').innerHTML = hello('World');
     </script>
+
+    <h1>Array Methods</h1>
+    <p>
+    There are many JavaScript array methods.<br>
+    One of the most useful in React is the .map() array method.<br>
+    The .map() method allows you to run a function on each item in the array, returning a new array as the result.
+    In React, map() can be used to generate lists.
+    </p>
+    <p>A demonstration of the array methods are done in inde.js react file.</p>
+
+
+    <h1>React ES6 Destructuring</h1>
+    <p>
+        To illustrate destructuring, we'll make a sandwich. Do you take everything out of the refrigerator to make your sandwich? 
+        No, you only take out the items you would like to use on your sandwich.
+    </p>
+    <script>
+        function calculate(a, b){
+            const add = a + b;
+            const sub = a - b;
+            const mul = a * b;
+            const div = a / b;
+            return [add, sub, mul, div];
+        }
+        const [add, sub, mul, div] = calculate(10, 5);
+
+        document.write("<p> Sum: " + add + "</p>");
+        document.write("<p> Difference: " + sub + "</p>");
+        document.write("<p> Product: " + mul + "</p>");
+        document.write("<p> Quotient: " + div + "</p>");
+    </script>
+
+        <h2>Destructuring Objects</h2>
+        <p id="demo4"></p>
+        <script>
+            const vehicleOne = {
+                brand: 'Ford',
+                model: 'Mustang',
+                type: 'car',
+                year: 2021, 
+                color: 'red'
+            }
+
+            myVehicle(vehicleOne);
+
+            function myVehicle({type, color, brand, model}) {
+            const message = 'My ' + type + ' is a ' + color + ' ' + brand + ' ' + model + '.';
+
+            document.getElementById("demo4").innerHTML = message;
+            }
+        </script>
+
+        <h1>Spread Operator</h1>
+        <p>
+        The JavaScript spread operator (...) allows us to quickly copy all or part of an existing array or 
+        object into another array or object.
+        </p>
+        <script>
+            const numberOne = [1, 2, 3];
+            const numberTwo = [4, 5, 6];
+            const numberCombined = [...numberOne, ...numberTwo];
+            document.write("<p> " + numberCombined + "</p>");
+            document.write("<br>");
+
+            const myVehicle2 = {
+                brand: 'Ford',
+                model: 'Mustang',
+                color: 'red'
+            }
+            const updatedVehicle = {
+                type: 'car',
+                year: 2021,
+                color: 'blue'
+            }
+            const myVehicleCombined = {...myVehicle2,...updatedVehicle}
+            //check the result in the console
+            console.log(myVehicleCombined);
+        </script>
+        <p> Press F12 and see the result object in the console view </p>
+
+        <h1>React ES6 Modules (import, export)</h1>
+        <p id="demo5"></p>
+        <script type="module">
+            import {name, age} from './person.js';
+            import message from './message.js';
+
+            document.getElementById("demo5").innerHTML = "My name is " + name ;
+            document.getElementById("demo5").innerHTML += ", and I am " + age + " years old.";
+            document.write("<br>");
+            document.getElementById("demo5").innerHTML = message();
+        </script>
+
+        <h1>Ternary Operator</h1>
+        <p>
+        The ternary operator is a simplified conditional operator like if / else.<br>
+        Syntax: condition ? <span> (expression) if true : (expression) if false</span>
+        </p>
+
     </body>
 
     
