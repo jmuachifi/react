@@ -16,11 +16,14 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();*/
 
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useEffect, createContext, useContext, useCallback } from "react";
+import React, { useRef } from "react";
 import ReactDOM from "react-dom/client";
 import Todos from "./Todos";
+import Todos2 from "./Todos2";
 import './App.css';
 import Car from "./Car.js";
+import useFetch from "./useFetch";
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -233,3 +236,86 @@ function Timer(){
   }
   const root8 = ReactDOM.createRoot(document.getElementById('my-user-context'));
   root8.render(<Component1 />);
+
+
+  //react useRef
+  function App2(){
+    const [inputValue, setInputValue] = useState("");
+    const count = useRef(0);
+
+    useEffect(() => {
+      count.current = count.current + 1;
+    });
+
+    return (
+      <>
+        <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+        <h1>Render Count {count.current}</h1>
+      </>
+    );
+  }
+  const root9 = ReactDOM.createRoot(document.getElementById('my-use-ref'));
+  root9.render(<App2 />);
+
+
+  function App3() {
+    const [inputValue, setInputValue] = useState("");
+    const previousInputValue = useRef("");
+  
+    useEffect(() => {
+      previousInputValue.current = inputValue;
+    }, [inputValue]);
+  
+    return (
+      <>
+        <input
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <h2>Current Value: {inputValue}</h2>
+        <h2>Previous Value: {previousInputValue.current}</h2>
+      </>
+    );
+  }
+  const root10 = ReactDOM.createRoot(document.getElementById('my-use-ref2'));
+  root10.render(<App3 />);
+
+  const App4 = () => {
+    const [count, setCount] = useState(0);
+    const [todos, setTodos] = useState([]);
+  
+    const increment = () => {
+      setCount((c) => c + 1);
+    };
+    const addTodo = useCallback(() => {
+      setTodos((t) => [...t, "New Todo"]);
+    }, [todos]);
+  
+    return (
+      <>
+        <Todos2 todos={todos} addTodo={addTodo} />
+        <hr />
+        <div>
+          Count: {count}
+          <button onClick={increment}>+</button>
+        </div>
+      </>
+    );
+  };
+  const root11 = ReactDOM.createRoot(document.getElementById('my-use-ref3'));
+  root11.render(<App4 />);
+
+  const Home = () => {
+    const [data] = useFetch("https://jsonplaceholder.typicode.com/todos");
+    return (
+      <>
+        {data && 
+        data.map((item) => {
+          return <p key={item.id}>{item.title}</p>;
+        })}
+      </>
+    );
+  }
+  const root12 = ReactDOM.createRoot(document.getElementById('my-use-ref4'));
+  root12.render(<Home />);
