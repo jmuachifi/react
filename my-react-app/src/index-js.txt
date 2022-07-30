@@ -1,0 +1,374 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Car4 from './car.js';
+import { useState } from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+// Pages
+import Layout from "./pages/Layout";
+import Home from "./pages/Home";
+import Blogs from "./pages/Blogs";
+import Contact from "./pages/Contact";
+import NoPage from "./pages/NoPage";
+//import './index.css';
+//import App from './App';
+//import reportWebVitals from './reportWebVitals';
+
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="*" element={<NoPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+const routes = ReactDOM.createRoot(document.getElementById('routes'));
+routes.render(<App />);
+
+const myFirstElement =  <h1 className='text text-center'>Hello React!</h1>
+const root = ReactDOM.createRoot(document.getElementById('my-react-app'));
+root.render( myFirstElement );
+
+
+
+
+/*
+const myElement = <h1 className=''>I Love JSX!</h1>;
+const jsx = ReactDOM.createRoot(document.getElementById('myjsx'));
+jsx.render(myElement);
+
+
+
+const myElement2 = React.createElement('h1', {}, 'I do not use JSX!');
+const root2 = ReactDOM.createRoot(document.getElementById('root'));
+root2.render(myElement2);
+
+const myElement3 = <h1>React is {5 + 5} times better with JSX</h1>;
+const root3 = ReactDOM.createRoot(document.getElementById('root3'));
+root3.render(myElement3);
+
+
+const myElement4 = (
+  <ul>
+    <li>Apples</li>
+    <li>Bananas</li>
+    <li>Cherries</li>
+  </ul>
+);
+const root4 = ReactDOM.createRoot(document.getElementById('root4'));
+root4.render(myElement4)
+
+const myElement5 = (
+  <div>
+    <h2>I am a Header.</h2>
+    <h2>I am a Header too.</h2>
+  </div>
+);
+
+const root5 = ReactDOM.createRoot(document.getElementById('root5'));
+root5.render(myElement5);
+
+const x = 25
+let text = "Goodbye"
+if (x < 10) {
+  text = "Hello"
+}
+const myElement6 = <h2 className='text text-success'>{text}</h2>
+const root6 = ReactDOM.createRoot(document.getElementById('root6'));
+root6.render(myElement6);
+
+
+//function component
+function Car(){
+  return <h2 className='text text-warning'>I am a car</h2>
+}
+const root7 = ReactDOM.createRoot(document.getElementById('root7'));
+root7.render(<Car />);
+
+// function component with props
+function Car2(props){
+  return <h2 className='text text-danger'>I am a car with {props.color}</h2>
+}
+const root8 = ReactDOM.createRoot(document.getElementById('root8'));
+root8.render(<Car2 color='red' />);
+
+// Component in Component
+function Car3(){
+  return <h2 className='text text-primary'>I am a car!</h2>
+}
+function Garage(){
+  return <div>
+    <h2>Who lives in my Garage?</h2>
+    <Car3 />
+  </div>
+}
+const root9 = ReactDOM.createRoot(document.getElementById('root9'));
+root9.render(<Garage />);
+
+//Component in file
+const root10 = ReactDOM.createRoot(document.getElementById('root10'));
+root10.render(<Car4 />);
+
+
+// React events
+function Football(){
+  const shoot = () => {
+    alert('Great shoot!');
+  }
+  return (
+    <button onClick={shoot} >Take the shot!</button>
+  );
+}
+const root11 = ReactDOM.createRoot(document.getElementById('root11'));
+root11.render(<Football />);
+
+// if stetement - choose one of two components
+function  MissedGoal(){
+  return <h2 className='text text-danger'>You MISSED!</h2>
+}
+function MadeGoal(){
+  return <h2 className='text text-success'>You MADE!</h2>
+}
+function Goal(props){
+  const isGoal = props.isGoal;
+  if (isGoal){
+    return <MadeGoal />
+  }
+  return <MissedGoal />
+}
+const root12 = ReactDOM.createRoot(document.getElementById('root12'));
+root12.render(<Goal isGoal={false} />);*/
+
+/**
+ * Ternary Operator
+ * 
+ * function Goal(props) {
+  const isGoal = props.isGoal;
+  return (
+    <>
+      { isGoal ? <MadeGoal/> : <MissedGoal/> }
+    </>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Goal isGoal={false} />);
+ */
+
+//Logical && Operator
+/*
+function Garage2(props){
+  const cars = props.cars;
+  return (
+    <>
+      <h2>Garage</h2>
+      {
+        cars.length > 0 && <p>You have {cars.length} cars in the garage</p>
+      }
+    </>
+  );
+}
+const cars2 = ['BMW', 'Mercedes', 'Audi'];
+const root13 = ReactDOM.createRoot(document.getElementById('root13'));
+root13.render(<Garage2 cars={cars2} />);
+
+// React Lists - using map()
+function Cars3(props){
+  return <li>I am a {props.brand}</li>;
+}
+function Garage3(){
+  const cars = ['BMW', 'Mercedes', 'Audi'];
+  return (
+    <>
+      <h2>Who lives in my  Garage?  </h2>
+      <ul>
+        {cars.map(car => <Cars3 brand={car} />)}
+      </ul>
+    </>
+  );
+}
+const root14 = ReactDOM.createRoot(document.getElementById('root14'));
+root14.render(<Garage3 />);
+
+
+function Cars4(props){
+  return <li>I am a {props.brand}</li>;
+}
+function Garage4(){
+    const cars = [
+      {id: 1,  brand: 'BMW'}, 
+      {id: 2, brand: 'Mercedes'},
+      {id: 3, brand: 'Audi'}
+    ];
+  return (
+    <>
+      <h2>Who lives in my  Garage?  </h2>
+      <ol>
+        {cars.map(car => <Cars4 key={car.id} brand={car.brand} />)}
+      </ol>
+    </>
+  );
+}
+const root15 = ReactDOM.createRoot(document.getElementById('root15'));
+root15.render(<Garage4 />);
+
+// Form in react - simple form
+function MyForm(){
+  return (
+    <form>
+      <label> Enter your Name :  </label>
+      <input type='text' />
+    </form>
+  )
+}
+const root16 = ReactDOM.createRoot(document.getElementById('root16'));
+root16.render(<MyForm />);
+
+// Endling form in react - simple form
+function MyForm2(){
+  const [name, setName] = useState('');
+  return (
+    <form>
+      <label> Enter your Name :  </label>
+      <input type='text' value={name} onChange={e => setName(e.target.value)} />
+    </form>
+  )
+}
+const root17 = ReactDOM.createRoot(document.getElementById('root17'));
+root17.render(<MyForm2 />);
+
+// submit form in react - simple form
+function MyForm3(){
+  const [name, setName] = useState('');
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(`The name you entered was: ${name}`);
+  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label> Enter your Name :  </label>
+      <input type='text' value={name} onChange={e => setName(e.target.value)} />
+    </form>
+  )
+}
+const root18 = ReactDOM.createRoot(document.getElementById('root18'));
+root18.render(<MyForm3 />);
+
+
+//Multiple forms in react - simple form
+function MyForm4(){
+  const [inputs, setInputs] = useState({});
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    //const {name, value} = event.target;
+    setInputs(values => ({...values, [name]: value}));
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //alert(`The name you entered was: ${inputs.name}`);
+    console.log(inputs);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label> Enter your Name :  </label>
+      <input type='text' name='username' value={inputs.username || ""} onChange={handleChange} />
+      <label> Enter your Age :  </label>
+      <input type='text' name='age' value={inputs.age || ""} onChange={handleChange} />
+      <button type='submit'>Submit</button>
+    </form>
+  )
+}
+const root19 = ReactDOM.createRoot(document.getElementById('root19'));
+root19.render(<MyForm4 />);
+
+// Text area in react - simple form
+function MyForm5(){
+  const [textarea, setTextarea] = useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    );
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setTextarea(value);
+  }
+
+  return (
+    <form>
+      <textarea value={textarea} onChange={handleChange} />
+    </form>
+  )
+}
+const root20 = ReactDOM.createRoot(document.getElementById('root20'));
+root20.render(<MyForm5 />);
+
+
+// Select in react - simple form
+function MyForm6(){
+  const [myCar, setSelect] = useState('Volvo');
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setSelect(value);
+  }
+
+  return (
+    <form>
+      <select value={myCar} onChange={handleChange}>
+        <option value='Ford'>Ford</option>
+        <option value='Volvo'>Volvo</option>
+        <option value='Fiat'>Fiat</option>
+        <option value='Ranger'>Ranger</option>
+      </select>
+    </form>
+  )
+}
+const root21 = ReactDOM.createRoot(document.getElementById('root21'));
+root21.render(<MyForm6 />);
+
+
+
+//h1>Array Methods</h1>
+const myArray = ['apple', 'banana', 'orange'];
+const myList = myArray.map(item => <p>{item}</p>);
+ReactDOM.render(myList, document.getElementById('myList'));
+
+//React Render HTML
+const myelement = (
+  <table>
+    <tr>
+      <th>Name</th>
+    </tr>
+    <tr>
+      <td>John</td>
+    </tr>
+    <tr>
+      <td>Jane</td>
+    </tr>
+  </table>
+)
+ReactDOM.render(myelement, document.getElementById('mytable'));
+
+
+ReactDOM.render(<p className='text text-center'>Hallo</p>, document.getElementById('sandy'));
+*/
+
+ /*root.render( <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);*/
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+//reportWebVitals();
